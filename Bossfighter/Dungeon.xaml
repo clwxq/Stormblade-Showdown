@@ -12,18 +12,40 @@
     <Grid Background="#292928">
         <Grid.RowDefinitions>
             <RowDefinition Height="69*"/>
-            <RowDefinition Height="446*"/>
-            <RowDefinition Height="119*"/>
+            <RowDefinition Height="395*"/>
+            <RowDefinition Height="31*"/>
+            <RowDefinition Height="139*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="500*"/>
-            <ColumnDefinition Width="500*"/>
+            <ColumnDefinition Width="450*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="450*"/>
         </Grid.ColumnDefinitions>
 
-        <Label Content="" Grid.Row="0" Grid.Column="0" />
-        <Image Source="/Images/keqing2.png" Grid.Column="0" Grid.Row="1"/>
-        <!--https://genshin-impact.fandom.com/wiki/Osial
-        https://genshin-impact.fandom.com/wiki/Keqing/Lore#Character_Story_1-->
+        <!--left side (player)-->
+        <Label x:Name="player_name_UI" Content="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Height="49" Width="10" Foreground="#bfa3e7"/>
+        <Image Source="/Images/keqing2.png" Grid.Column="0" Margin="0,69,0,0" Grid.RowSpan="2"/>
+        <ProgressBar x:Name="hp_player" Grid.Row="2" Grid.Column="0" Background="#bfa3e7"/>
+        <Button x:Name="sword_atck" Grid.Column="0" Grid.Row="3" Width="100" Height="100" Background="Transparent" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="40,0,0,0" Click="sword_atck_Click" ClickMode="Release">
+            <Image Source="/Images/swordatk.png"/>
+        </Button>
+        <Button x:Name="e_skill" Grid.Column="0" Grid.Row="3" Width="100" Height="100" Background="Transparent" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="170,0,0,0" Click="e_skill_Click" ClickMode="Release">
+            <Image Source="/Images/eskill.png"/>
+        </Button>
+        <Button x:Name="parry" Grid.Column="0" Grid.Row="3" Width="100" Height="100" Background="Transparent" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="300,0,0,0" Click="parry_Click" ClickMode="Release">
+            <Image Source="/Images/ult.png"/>
+        </Button>
+
+
+        <!--middle (round/floor/info) -->
+        <Label x:Name="floor_round" Content="I." Grid.Row="0" Grid.Column="1" FontSize="45" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#bfa3e7"/>
+        <Label Content="VS" Grid.Row="1" Grid.Column="1" FontSize="45" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#bfa3e7"/>
+
+
+        <!--right side (enemy)-->
+        <Label x:Name="enemy" Content="Osial" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Column="2" Height="49" Width="104" Foreground="#bfa3e7"/>
+        <Image Source="/Images/osial.png" Grid.Column="2" Margin="0,69,0,0" Grid.RowSpan="2"/>
+        <ProgressBar x:Name="hp_enemy" Grid.Row="2" Grid.Column="2" Background="#bfa3e7"/>
 
     </Grid>
 </Window>

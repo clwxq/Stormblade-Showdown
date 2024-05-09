@@ -8,15 +8,27 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\Images.png" />
+    <None Remove="Images\eskill.png" />
     <None Remove="Images\keqing2.png" />
+    <None Remove="Images\Osial.png" />
+    <None Remove="Images\swordatk.png" />
+    <None Remove="Images\ult.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Images\Images.png">
+    <Content Include="Images\eskill.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\osial.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\keqing2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\swordatk.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ult.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

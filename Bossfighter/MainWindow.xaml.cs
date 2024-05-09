@@ -20,7 +20,6 @@ namespace Bossfighter
     /// </summary>
     public partial class MainWindow : Window
     {
-        public string name { get; set; }
         Dungeon dungeon = new();
         public MainWindow()
         {
@@ -31,11 +30,11 @@ namespace Bossfighter
         {
             if(name_input.Text != "")
             {
-                name = name_input.Text;
+                dungeon.player_name_UI.Content = name_input.Text;
             }
             else
             {
-                name = "Keqing";
+                dungeon.player_name_UI.Content = "Keqing";
             }
             this.Close();
             dungeon.Show();
