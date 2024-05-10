@@ -9,8 +9,11 @@
 
   <ItemGroup>
     <None Remove="Images\eskill.png" />
+    <None Remove="Images\ganyu.png" />
     <None Remove="Images\keqing2.png" />
     <None Remove="Images\Osial.png" />
+    <None Remove="Images\slime.png" />
+    <None Remove="Images\sucrose.png" />
     <None Remove="Images\swordatk.png" />
     <None Remove="Images\ult.png" />
   </ItemGroup>
@@ -19,10 +22,19 @@
     <Content Include="Images\eskill.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\ganyu.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\osial.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\keqing2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\slime.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\sucrose.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\swordatk.png">

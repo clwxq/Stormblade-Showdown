@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Stormblade showdown" 
         Height="650" 
-        Width="1000">
+        Width="1000" WindowStartupLocation="CenterScreen">
 
     <Grid Background="#292928">
         <Grid.RowDefinitions>
@@ -43,9 +43,10 @@
 
 
         <!--right side (enemy)-->
-        <Label x:Name="enemy" Content="Osial" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Column="2" Height="49" Width="104" Foreground="#bfa3e7"/>
-        <Image Source="/Images/osial.png" Grid.Column="2" Margin="0,69,0,0" Grid.RowSpan="2"/>
+        <Label x:Name="enemy" Content="Hydro Slimes" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Column="2" Height="49" Width="104" Foreground="#bfa3e7"/>
+        <Image x:Name="enemy_img" Source="/Images/slime.png" Grid.Column="2" Margin="0,69,0,0" Grid.RowSpan="2"/>
         <ProgressBar x:Name="hp_enemy" Grid.Row="2" Grid.Column="2" Background="#bfa3e7"/>
+        <Button x:Name="next_rnd" Content="Next round" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="3" Width="190" Height="80" FontSize="30" Background="#bfa3e7" Foreground="#292928" Click="next_rnd_Click" ClickMode="Release"/>
 
     </Grid>
 </Window>
