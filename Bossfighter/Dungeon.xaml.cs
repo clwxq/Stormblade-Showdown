@@ -20,65 +20,32 @@ namespace Bossfighter
     /// </summary>
     public partial class Dungeon : Window
     {
-        public static Random random = new();
         public static BitmapImage bitmap = new();
-
-        public double player_hp_num = 200;
-        public double player_dmg = 11;
-        public double player_heal()
-        { 
-            return random.Next(8, 20); 
-        }
-        public double player_parry ()
-        {
-            return random.Next(0, 3);
-        }
-
-        public double enemy_hp_num { get; set; }
-
-        public double enemy_dmg { get; set; }
-        public double enemy_heal ()
-        {
-            return random.Next(4, 10);
-        }
-        public double enemy_parry ()
-        {
-            return random.Next(0, 3);
-        }
-
-        public double crit_chance ()
-        {
-            return random.Next(0, 2);
-        }
-        public double crit_rate = 0.5;
-        public int floor = 1;
-        public int action = 0;
-        public int enemy_action = 0;
-        public string img_path = string.Empty;
+        public static Stats stats = new();
+        public static Random random = new();
+        LoseScreen losescreen = new();
+        WinScreen winscreen = new();
 
         public Dungeon()
         {
             InitializeComponent();
-            hp_player.Maximum = player_hp_num;
-            hp_enemy.Maximum = enemy_hp_num;
-            hp_player.Value = player_hp_num;
-            hp_enemy.Value = enemy_hp_num;
+            Floor_checker();
             Round();
         }
         private void sword_atck_Click (object sender, RoutedEventArgs e)
         {
-            action = 1;
+            stats.action = 1;
         }
 
         private void e_skill_Click(object sender, RoutedEventArgs e)
         {
-            action = 2;
+            stats.action = 2;
         }
 
 
         private void parry_Click(object sender, RoutedEventArgs e)
         {
-            action = 3;
+            stats.action = 3;
         }
 
         private void next_rnd_Click (object sender, RoutedEventArgs e)
@@ -89,153 +56,179 @@ namespace Bossfighter
 
         public void Round()
         {
-            if(hp_enemy.Value <= 0)
+            hp_player.Maximum = stats.player_hp_hold;
+            hp_enemy.Maximum = stats.enemy_hp_hold;
+            hp_player.Value = stats.player_hp_num;
+            hp_enemy.Value = stats.enemy_hp_num;
+            if (stats.player_hp_num <= 0)
             {
-                floor++;
+                this.Close();
+                losescreen.Show();
             }
-            if (floor == 1)
+            else if (stats.enemy_hp_num <= 0)
             {
+                stats.floor++;
+                Floor_checker();
+            }
+            else
+            {
+                switch (stats.action)
+                {
+                    case 1:
+                        {
+                            if (stats.enemy_hp_num >= 790)
+                            {
+                                stats.enemy_action = random.Next(0, 2);
+                                if (stats.enemy_action == 0)
+                                {
+                                    Sword_attack();
+                                    Enemy_attack();
+                                }
+                                else if (stats.enemy_action == 1)
+                                {
+                                    Enemy_parry();
+                                }
+                            }
+                            else
+                            {
+                                stats.enemy_action = random.Next(0, 3);
+                                if (stats.enemy_action == 0)
+                                {
+                                    Sword_attack();
+                                    Enemy_attack();
+                                }
+                                else if (stats.enemy_action == 1)
+                                {
+                                    Sword_attack();
+                                    Enemy_heal();
+                                }
+                                else if (stats.enemy_action == 2)
+                                {
+                                    Enemy_parry();
+                                }
+                            }
+                            break;
+                        }
+                    case 2:
+                        {
+                            Heal();
+                            if (stats.enemy_hp_num >= 790)
+                            {
+                                Enemy_attack();
+                            }
+                            else
+                            {
+                                stats.enemy_action = random.Next(0, 2);
+                                if (stats.enemy_action == 0)
+                                {
+                                    Enemy_attack();
+                                }
+                                else if (stats.enemy_action == 1)
+                                {
+                                    Enemy_heal();
+                                }
+                            }
+                            break;
+                        }
+                    case 3:
+                        {
+                            Parry();
+                            break;
+                        }
+                }
+            }
+        }
+        public void Floor_checker()
+        {
+            if (stats.floor == 1)
+            {
+                stats.enemy_dmg = 4;
+                stats.enemy_hp_num = 2000;
+                Player_buffer();
                 floor_round.Content = "I.";
                 enemy.Content = "Sucrose";
                 string img_path = "/Images/sucrose.png";
                 BitmapImage bitmap = new BitmapImage(new Uri(img_path, UriKind.Relative));
                 enemy_img.Source = bitmap;
-                enemy_dmg = 4;
-                enemy_hp_num = 200;
             }
-            else if (floor == 2)
+            else if (stats.floor == 2)
             {
+                stats.enemy_dmg = 6;
+                stats.enemy_hp_num = 4000;
+                Player_buffer();
                 floor_round.Content = "II.";
                 enemy.Content = "Ganyu";
                 string img_path = "/Images/ganyu.png";
                 BitmapImage bitmap = new BitmapImage(new Uri(img_path, UriKind.Relative));
                 enemy_img.Source = bitmap;
-                enemy_dmg = 6;
-                enemy_hp_num = 400;
             }
-            else if (floor == 3)
+            else if (stats.floor == 3)
             {
+                stats.enemy_dmg = 8;
+                stats.enemy_hp_num = 6000;
+                Player_buffer();
                 floor_round.Content = "III.";
                 enemy.Content = "Hydro Slime";
                 string img_path = "/Images/slime.png";
                 BitmapImage bitmap = new BitmapImage(new Uri(img_path, UriKind.Relative));
                 enemy_img.Source = bitmap;
-                enemy_dmg = 8;
-                enemy_hp_num = 600;
             }
-            else if (floor == 4)
+            else if (stats.floor == 4)
             {
+                stats.enemy_dmg = 10;
+                stats.enemy_hp_num = 8000;
+                Player_buffer();
                 floor_round.Content = "IV.";
                 enemy.Content = "Osial";
                 string img_path = "/Images/osial.png";
                 BitmapImage bitmap = new BitmapImage(new Uri(img_path, UriKind.Relative));
                 enemy_img.Source = bitmap;
-                enemy_dmg = 10;
-                enemy_hp_num = 800;
             }
             else
             {
-                //win window
-            }
-            switch (action)
-            {
-                case 1:
-                    {
-                        if (enemy_hp_num >= 790)
-                        {
-                            enemy_action = random.Next(0, 2);
-                            if (enemy_action == 0)
-                            {
-                                Sword_attack();
-                                Enemy_attack();
-                            }
-                            else if (enemy_action == 1)
-                            {
-                                Enemy_parry();
-                            }
-                        }
-                        else
-                        {
-                            enemy_action = random.Next(0, 3);
-                            if (enemy_action == 0)
-                            {
-                                Sword_attack();
-                                Enemy_attack();
-                            }
-                            else if (enemy_action == 1)
-                            {
-                                Sword_attack();
-                                Enemy_heal();
-                            }
-                            else if (enemy_action == 2)
-                            {
-                                Enemy_parry();
-                            }
-                        }
-                        break;
-                    }
-                case 2:
-                    {
-                        Heal();
-                        if (enemy_hp_num >= 790)
-                        {
-                            Enemy_attack();
-                        }
-                        else
-                        {
-                            enemy_action = random.Next(0, 2);
-                            if (enemy_action == 0)
-                            {
-                                Enemy_attack();
-                            }
-                            else if (enemy_action == 1)
-                            {
-                                Enemy_heal();
-                            }
-                        }
-                        break;
-                    }
-                case 3:
-                    {
-                        Parry();
-                        break;
-                    }
+                this.Close();
+                winscreen.Show();
             }
         }
 
         public void Sword_attack()
         {
             //crit attack
-            if (crit_chance() == 1)
+            if (stats.crit_chance() == 1)
             {
-                player_dmg *= crit_rate;
-                enemy_hp_num -= player_dmg;
-                hp_enemy.Value = enemy_hp_num;
-                player_dmg = 11;
+                stats.player_dmg *= stats.crit_rate;
+                stats.enemy_hp_num -= stats.player_dmg;
+                hp_enemy.Value = stats.enemy_hp_num;
+                chat.Text = $"You dealt ({stats.player_dmg}dmg)";
+                stats.player_dmg = stats.player_dmg_hold;
             }
             //unlucky basic attack
-            else if(crit_chance() == 0)
+            else if(stats.crit_chance() == 0)
             {
-                enemy_hp_num -= player_dmg;
-                hp_enemy.Value = enemy_hp_num;
+                stats.enemy_hp_num -= stats.player_dmg;
+                hp_enemy.Value = stats.enemy_hp_num;
+                chat.Text = $"You dealt ({stats.player_dmg}dmg)";
             }
         }
 
         public void Parry()
         {
             //unlucky neni parry
-            if(player_parry() == 0)
+            if(stats.player_parry() == 0)
             {
                 Enemy_attack();
+                chat.Text = $"You failed the parry and took ({stats.enemy_dmg}dmg)";
             }
             //je perry bez dmg
-            else if (player_parry() == 1)
+            else if (stats.player_parry() == 1)
             {
                 //no action
+                chat.Text = $"You succesfully paried without bonus dmg";
             }
             //je perry + bonus hit
-            else if (player_parry() == 2)
+            else if (stats.player_parry() == 2)
             {
+                chat.Text = $"You succesfully paried and dealt ({stats.player_dmg}dmg)";
                 Sword_attack();
             }
         }
@@ -243,42 +236,49 @@ namespace Bossfighter
         public void Heal()
         {
             //player heal
-            hp_player.Value += player_heal();
+            stats.player_hp_num += stats.player_heal();
+            hp_player.Value = stats.player_hp_num;
+            chat.Text = $"You healed for ({stats.player_heal()}hp)";
         }
 
         public void Enemy_attack ()
         {
             //crit attack
-            if (crit_chance() == 1)
+            if (stats.crit_chance() == 1)
             {
-                enemy_dmg *= crit_rate;
-                player_hp_num -= enemy_dmg;
-                hp_player.Value = player_hp_num;
-                enemy_dmg = 8;
+                stats.enemy_dmg *= stats.crit_rate;
+                stats.player_hp_num -= stats.enemy_dmg;
+                hp_player.Value = stats.player_hp_num;
+                chat.Text = $"Enemy dealt ({stats.enemy_dmg})";
+                stats.enemy_dmg = stats.enemy_dmg_hold;
             }
             //unlucky basic attack
-            else if (crit_chance() == 0)
+            else if (stats.crit_chance() == 0)
             {
-                player_hp_num -= enemy_dmg;
-                hp_player.Value = player_hp_num;
+                stats.player_hp_num -= stats.enemy_dmg;
+                hp_player.Value = stats.player_hp_num;
+                chat.Text = $"Enemy dealt ({stats.enemy_dmg}dmg)";
             }
         }
 
         public void Enemy_parry ()
         {
             //unlucky neni parry
-            if (player_parry() == 0)
+            if (stats.player_parry() == 0)
             {
+                chat.Text = $"Enemy failed the parry and took ({stats.player_dmg}dmg)";
                 Sword_attack();
             }
             //je perry bez dmg
-            else if (player_parry() == 1)
+            else if (stats.player_parry() == 1)
             {
                 //no action
+                chat.Text = $"Enemy succesfully paried without bonus dmg";
             }
             //je perry + bonus hit
-            else if (player_parry() == 2)
+            else if (stats.player_parry() == 2)
             {
+                chat.Text = $"Enemy succesfully paried and dealt ({stats.enemy_dmg}dmg)";
                 Enemy_attack();
             }
         }
@@ -286,7 +286,19 @@ namespace Bossfighter
         public void Enemy_heal ()
         {
             //boss heal
-            hp_enemy.Value += enemy_heal();
+            stats.enemy_hp_num += stats.enemy_heal();
+            hp_enemy.Value = stats.enemy_hp_num;
+            chat.Text = $"Enemy healed for ({stats.enemy_heal()}hp)";
+        }
+
+        public void Player_buffer() //+enemy dmg hold
+        {
+            stats.player_hp_num += stats.player_increase_hp();
+            stats.player_dmg += stats.player_increase_dmg();
+            stats.player_hp_hold = stats.player_hp_num;
+            stats.player_dmg_hold = stats.player_dmg;
+            stats.enemy_dmg_hold = stats.enemy_dmg;
+            stats.enemy_hp_hold = stats.enemy_hp_num;
         }
     }
 }

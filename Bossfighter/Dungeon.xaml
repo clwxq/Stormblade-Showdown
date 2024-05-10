@@ -23,7 +23,7 @@
         </Grid.ColumnDefinitions>
 
         <!--left side (player)-->
-        <Label x:Name="player_name_UI" Content="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Height="49" Width="10" Foreground="#bfa3e7"/>
+        <Label x:Name="player_name_UI" Content="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Height="49" Width="400" Foreground="#bfa3e7" HorizontalContentAlignment="Center"/>
         <Image Source="/Images/keqing2.png" Grid.Column="0" Margin="0,69,0,0" Grid.RowSpan="2"/>
         <ProgressBar x:Name="hp_player" Grid.Row="2" Grid.Column="0" Background="#bfa3e7"/>
         <Button x:Name="sword_atck" Grid.Column="0" Grid.Row="3" Width="100" Height="100" Background="Transparent" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="40,0,0,0" Click="sword_atck_Click" ClickMode="Release">
@@ -40,13 +40,13 @@
         <!--middle (round/floor/info) -->
         <Label x:Name="floor_round" Content="I." Grid.Row="0" Grid.Column="1" FontSize="45" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#bfa3e7"/>
         <Label Content="VS" Grid.Row="1" Grid.Column="1" FontSize="45" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#bfa3e7"/>
-
+        <Button x:Name="next_rnd" Content="Next" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" Width="190" Height="80" FontSize="30" Background="#bfa3e7" Foreground="#292928" Click="next_rnd_Click" ClickMode="Release"/>
 
         <!--right side (enemy)-->
-        <Label x:Name="enemy" Content="Hydro Slimes" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Column="2" Height="49" Width="104" Foreground="#bfa3e7"/>
-        <Image x:Name="enemy_img" Source="/Images/slime.png" Grid.Column="2" Margin="0,69,0,0" Grid.RowSpan="2"/>
+        <Label x:Name="enemy" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Column="2" Height="49" Width="400" HorizontalContentAlignment="Center" Foreground="#bfa3e7"/>
+        <Image x:Name="enemy_img" Grid.Column="2" Margin="0,69,0,0" Grid.RowSpan="2"/>
         <ProgressBar x:Name="hp_enemy" Grid.Row="2" Grid.Column="2" Background="#bfa3e7"/>
-        <Button x:Name="next_rnd" Content="Next round" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="3" Width="190" Height="80" FontSize="30" Background="#bfa3e7" Foreground="#292928" Click="next_rnd_Click" ClickMode="Release"/>
+        <TextBlock x:Name="chat" Text="Chat:" Grid.Column="2" Grid.Row="3" Margin="10" FontSize="20" TextWrapping="Wrap" Foreground="#f2f3f2"/>
 
     </Grid>
 </Window>
