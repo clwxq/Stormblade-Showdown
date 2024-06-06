@@ -46,7 +46,8 @@
         <Label x:Name="enemy" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Column="2" Height="49" Width="400" HorizontalContentAlignment="Center" Foreground="#bfa3e7"/>
         <Image x:Name="enemy_img" Grid.Column="2" Margin="0,69,0,0" Grid.RowSpan="2"/>
         <ProgressBar x:Name="hp_enemy" Grid.Row="2" Grid.Column="2" Background="#bfa3e7"/>
-        <TextBlock x:Name="chat" Text="Chat:" Grid.Column="2" Grid.Row="3" Margin="10" FontSize="20" TextWrapping="Wrap" Foreground="#f2f3f2"/>
+        <TextBlock x:Name="chat" Text="Enemy_Chat:" Grid.Column="2" Grid.Row="3" Margin="10" FontSize="20" TextWrapping="Wrap" Foreground="#f2f3f2" Height="50" VerticalAlignment="Top"/>
+        <TextBlock x:Name="chat1" Text="Player_Chat:" Grid.Column="2" Grid.Row="3" Margin="10" FontSize="20" TextWrapping="Wrap" Foreground="#f2f3f2" Height="50" VerticalAlignment="Bottom"/>
 
     </Grid>
 </Window>

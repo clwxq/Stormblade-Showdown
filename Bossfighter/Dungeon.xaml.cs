@@ -111,6 +111,10 @@ namespace Bossfighter
                         }
                     case 2:
                         {
+                            if(stats.player_hp_num > stats.player_hp_hold)
+                            {
+                                break;
+                            }
                             Heal();
                             if (stats.enemy_hp_num >= 790)
                             {
@@ -199,7 +203,7 @@ namespace Bossfighter
                 stats.player_dmg *= stats.crit_rate;
                 stats.enemy_hp_num -= stats.player_dmg;
                 hp_enemy.Value = stats.enemy_hp_num;
-                chat.Text = $"You dealt ({stats.player_dmg}dmg)";
+                chat1.Text = $"You dealt ({stats.player_dmg}dmg)";
                 stats.player_dmg = stats.player_dmg_hold;
             }
             //unlucky basic attack
@@ -207,7 +211,7 @@ namespace Bossfighter
             {
                 stats.enemy_hp_num -= stats.player_dmg;
                 hp_enemy.Value = stats.enemy_hp_num;
-                chat.Text = $"You dealt ({stats.player_dmg}dmg)";
+                chat1.Text = $"You dealt ({stats.player_dmg}dmg)";
             }
         }
 
@@ -217,18 +221,18 @@ namespace Bossfighter
             if(stats.player_parry() == 0)
             {
                 Enemy_attack();
-                chat.Text = $"You failed the parry and took ({stats.enemy_dmg}dmg)";
+                chat1.Text = $"You failed the parry and took ({stats.enemy_dmg}dmg)";
             }
             //je perry bez dmg
             else if (stats.player_parry() == 1)
             {
                 //no action
-                chat.Text = $"You succesfully paried without bonus dmg";
+                chat1.Text = $"You succesfully paried without bonus dmg";
             }
             //je perry + bonus hit
             else if (stats.player_parry() == 2)
             {
-                chat.Text = $"You succesfully paried and dealt ({stats.player_dmg}dmg)";
+                chat1.Text = $"You succesfully paried and dealt ({stats.player_dmg}dmg)";
                 Sword_attack();
             }
         }
@@ -238,7 +242,7 @@ namespace Bossfighter
             //player heal
             stats.player_hp_num += stats.player_heal();
             hp_player.Value = stats.player_hp_num;
-            chat.Text = $"You healed for ({stats.player_heal()}hp)";
+            chat1.Text = $"You healed for ({stats.player_heal()}hp)";
         }
 
         public void Enemy_attack ()

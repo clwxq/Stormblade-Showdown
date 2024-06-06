@@ -48,7 +48,7 @@ namespace Bossfighter
         {
             return random.Next(0, 2);
         }
-        public double crit_rate = 0.5;
+        public double crit_rate = 1.5;
         public int floor = 1;
         public int action = 0;
         public int enemy_action = 0;
